@@ -1,0 +1,37 @@
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Ingrese la tarea..."
+        [(ngModel)]="taskName"
+        (keyup.enter)="addTask()"
+      />
+
+    </div>
+
+    <div class="col-lg-6 offset-lg-3 mt-3">
+      @if (taskList.length === 0) {
+      <div class="card p-3">
+        <h6 class="text-danger">No hay tareas</h6>
+      </div>
+    }
+      <ul class="list-group">
+        @for (item of taskList; track $index) {
+
+        <li class="list-group-item d-flex justify-content-between">
+          <span class="cursor" (click)="changeState($index)">
+            <i class="text success" [ngClass]=" item.estado ? 'fa-regular fa-circle-check' : 'fa-regular fa-circle'"></i>
+          </span>
+          {{item.nombre}}
+          <span class="text-danger cursor" (click)="deleteTask($index)">
+            <i class="fa-solid fa-trash-can"></i>
+          </span>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>
